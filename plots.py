@@ -521,7 +521,6 @@ def calibration_plot_meas_bias_y():
     # measurement bias on Y (P_Y as target). Performance are calculated on Y
     # for plot_calib_counter,x in enumerate([0, 0.1, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9]):
     for plot_calib_counter, x in enumerate([0, 1, 3, 6, 9]):
-        print("nr", plot_calib_counter)
         label = r'[$\beta^Y_{m}$='+f'{x}]'
         param_dict = {"dim": 1000000, "l_y": 0, "l_m_y": x, "thr_supp": 1, "l_h_r": 0,  "l_h_q": 0,
                       "l_m": 0, "p_u": 1, "l_r": False, "l_o": False, "l_y_b": 0,
