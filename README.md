@@ -12,8 +12,8 @@ To know more about this research work, please refer to our papers:
 ### Using the biased dataset generator
 Clone repo and install packages:
 ```
-git clone https://github.com/rcrupiISP/ISParity.git
-cd ISParity
+git clone https://github.com/rcrupiISP/BiasOnDemand.git
+cd BiasOnDemand
 pip install -r requirements.txt
 ```
 
@@ -47,9 +47,9 @@ Furthermore, the following command line arguments are available to specify the t
 The biases are introduced w.r.t. idividuals in the group A=1.
 For most types of bias, larger values mean more bias. The only exceptions are undersampling and representation bias (which can be seen as a specific type of undersampling conditional on the feature R) where smaller values correspond to more (conditional) undersampling, i.e., more bias.
 
-For example, you can generate a dataset that includes measurement bias on the label Y and historical bias on the feature R with the following command:
+For example, you can generate a dataset that includes measurement bias on the label Y (magnitude: 1.5) and historical bias on the feature R (magnitude: 2) with the following command:
 ```
-python generate_dataset.py -p my_unbiased_dataset -dim 1000 
+python generate_dataset.py -p my_biased_dataset -dim 1000 -l_m_y 1.5 -l_h_r 2
 ```
 This dataset will be saved in `datasets/my_biased_dataset/`.
 
