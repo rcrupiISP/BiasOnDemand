@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 
 
-def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m=1, p_u=1, l_r=False, l_o=False, l_y_b=0, l_q=2, sy=5, l_r_q=0):
+def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m=1, p_u=1, l_r=False, l_o=False, l_y_b=0, l_q=2, sy=5, l_r_q=0, l_m_y_non_linear=False):
     """Generate a synthetic dataset.
 
     Parameters
@@ -39,6 +39,9 @@ def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m
         Standard deviation of the noise of Y
     l_r_q: float, optional
         Lambda coefficient that quantifies the influence from R to Q
+    l_m_y_non_linear: boolean, optional
+        Boolean variable for inducing non-linear measurement bias on the target y. The magnitude of the measurement bias is defined by the parameter `l_m_y`.
+        If `l_m_y_non_linear` is set to `True`, then the non-linear implementation of measurement bias will be applied on the target variable `y`. Otherwise, if `l_m_y_non_linear` is set to `False`, then the linear implementation of measurement bias will be applied on the target variable `y`.
 
     Returns
     -------
@@ -61,10 +64,14 @@ def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m
     R_A = 1/(1 + np.exp(l_r_q*R - l_h_q*A))
     Q = np.random.binomial(3, R_A)
 
-    # Y var
+    # Y var --> continuous var, denoted by s in the paper
     # y target, with measurement and historical bias
-    # TODO: add randomization to the way measurement bias on y is introduced?
-    y = R - l_q*Q - l_y*A - l_m_y*A + Ny + l_y_b*R*A
+    if l_m_y_non_linear:
+        # non-linear implementation of measurement bias on target y
+        y = R - l_q*Q - l_y*A + l_m_y*A*(R<np.median(R)) - l_m_y*A*(R>=np.median(R)) + Ny + l_y_b*R*A
+    else:
+        # linear implementation of measurement bias on target Y
+        y = R - l_q*Q - l_y*A - l_m_y*A + Ny + l_y_b*R*A
     # y only historical, no measurement bias
     y_real = R - l_q*Q - l_y*A + Ny + l_y_b*R*A
 

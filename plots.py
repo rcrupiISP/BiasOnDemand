@@ -279,6 +279,17 @@ def bias_plots(detailed=False, mutual_information_plot=False, mutual_info_metric
             return mutual_information(param_dict, mutual_info_metric, bias, y_bias_meas=True)
         return pipeline(param_dict, y_bias_meas=True)
 
+    @get_metrics_for_various_bias_values(detailed, mutual_information_plot, bias_values=[0, 0.1, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9], fig_title="Non-linear measurement bias on Y", xticks=[0, 3, 6, 9], xlabel=r"bias ($\beta^Y_{m}$)")
+    def measurement_bias_on_Y_non_linear(bias):
+        # non-linear measurement bias on Y (P_Y as target). Performance are calculated on Y
+        # l_m_y = [0, 0.1, 0.5, 1, 1.5, 2, 3, 4, 5, 6, 7, 8, 9]
+        param_dict = {"dim": dim, "l_y": 0, "l_m_y": bias, "thr_supp": 1, "l_h_r": 0,  "l_h_q": 0,
+                      "l_m": 0, "p_u": 1, "l_r": False, "l_o": False, "l_y_b": 0, "l_q": 2, "sy": 2, "l_r_q": 0,
+                      "l_m_y_non_linear": True}
+        if mutual_information_plot:
+            return mutual_information(param_dict, mutual_info_metric, bias, y_bias_meas=True)
+        return pipeline(param_dict, y_bias_meas=True)
+
     @get_metrics_for_various_bias_values(detailed, mutual_information_plot, bias_values=[1, 0.8, 0.6, 0.4, 0.2, 0.1, 0.075, 0.05, 0.025, 0.01, 0.005, 0.001, 0.0005], fig_title="Representation bias", xticks=[1, 0.5, 0.0005], xticklabels=['1', '0.5', '0.0005'], xlabel=r"bias ($p_u \;\;\;\,\,\not\!\!\!\!\!\!\!\perp\!\!\!\!\!\perp R$)")
     def representation_bias(bias):
         # representation bias
@@ -390,6 +401,7 @@ def bias_plots(detailed=False, mutual_information_plot=False, mutual_info_metric
         no_bias()
         measurement_bias_on_R()
         measurement_bias_on_Y()
+        measurement_bias_on_Y_non_linear()
         historical_bias_on_R()
         historical_bias_on_Y()
         historical_bias_on_Q()
