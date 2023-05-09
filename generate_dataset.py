@@ -60,7 +60,7 @@ def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m
     # X var
     # Variable R defined as the salary
     R = N1 - l_h_r*A
-    # Variable R influence Q, a discrete variable that define a zone in a city
+    # Variable R influence Q, a discrete variable that define a zone in a city. Here, Q can take 3 values
     R_A = 1/(1 + np.exp(l_r_q*R - l_h_q*A))
     Q = np.random.binomial(3, R_A)
 
