@@ -131,18 +131,18 @@ def create_synth(dim=15000, l_y=4, l_m_y=0, thr_supp=1, l_h_r=1.5,  l_h_q=1, l_m
 
 def main():
 
-    # generate unbiased dataset: python generate_dataset.py -f my_unbiased_dataset
-    # generate biased dataset: python generate_dataset.py -f my_biased_dataset TODO
+    # generate unbiased dataset with 1000 rows: python generate_dataset.py -p my_unbiased_dataset -dim 1000
+    # generate biased dataset: python generate_dataset.py -p my_biased_dataset -dim 1000 -l_m_y 1.5 -l_h_r 2
     # get help with: python generate_dataset.py -h
 
     parser = argparse.ArgumentParser(
         description='Generating a biased dataset.', argument_default=argparse.SUPPRESS)
 
-    parser.add_argument('-p', '--path', type=str, required=False,
+    parser.add_argument('-p', '--path', type=str, required=False, default='my_new_dataset',
                         help='The name of the directory where the new dataset should be stored. Existing csv files are overwritten')
 
     # dataset properties
-    parser.add_argument('-dim', type=int, required=False,
+    parser.add_argument('-dim', type=int, required=False, default=1000,
                         help='Dimension of the dataset')
     parser.add_argument('-sy', type=float, required=False,
                         help='Standard deviation of the noise of Y')
