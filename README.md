@@ -2,10 +2,12 @@
 
 BiasOnDemand is a Python package that generates synthetic datasets with different types of bias. This package is based on the research paper "Bias on Demand: A Modelling Framework That Generates Synthetic Data With Bias" published at the ACM Conference on Fairness, Accountability, and Transparency (ACM FAccT) 2023.
 
-The quickest way to generate a new (biased) dataset is to use pip install, following the instructions provided here: https://github.com/joebaumann/biasondemand
+The quickest way to generate a new (biased) dataset is to use pip install
 ```
 pip install biasondemand
 ```
+as described in the instructions provided here: https://github.com/joebaumann/biasondemand
+
 
 If you are interested in the experiments to investigate bias, fairness, and mitigation techniques, continue reading.
 
