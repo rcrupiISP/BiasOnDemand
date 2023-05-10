@@ -6,7 +6,7 @@ The quickest way to generate a new (biased) dataset is to use pip install
 ```
 pip install biasondemand
 ```
-as described in the instructions provided here: https://github.com/joebaumann/biasondemand
+as described in the instructions provided here: :star: **https://github.com/joebaumann/biasondemand** :star:.
 
 
 If you are interested in the experiments to investigate bias, fairness, and mitigation techniques, continue reading.
